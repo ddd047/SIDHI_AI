@@ -23,6 +23,12 @@ body {
   overflow-x: hidden;
 }
 
+/* ── Holographic card sweep ───────────────────────────── */
+@keyframes sweep {
+  from { left: -60%; }
+  to   { left: 130%; }
+}
+
 /* ── Premium violet scrollbar ─────────────────────────── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: rgba(2, 0, 16, 0.8); }
