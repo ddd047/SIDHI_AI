@@ -66,19 +66,6 @@ const founders = [
   },
 ];
 
-/* ── Scroll-reveal hook ──────────────────────────────────── */
-function useReveal() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold: 0.12 });
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return { ref, visible };
-}
 
 /* ── Main Component ──────────────────────────────────────── */
 export default function LandingPage() {
@@ -99,9 +86,6 @@ export default function LandingPage() {
   const [logIndex,        setLogIndex]        = useState(0);
   const logsEndRef = useRef<HTMLDivElement>(null);
 
-  /* Section reveals */
-  const productsReveal = useReveal();
-  const teamReveal     = useReveal();
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -278,14 +262,7 @@ export default function LandingPage() {
             SECTION 2 — PRODUCTS
         ══════════════════════════════════════════════════ */}
         <section id="products" className="relative max-w-6xl mx-auto px-6 py-20">
-          <div
-            ref={productsReveal.ref}
-            style={{
-              opacity:   productsReveal.visible ? 1 : 0,
-              transform: productsReveal.visible ? "translateY(0)" : "translateY(48px)",
-              transition:"opacity 0.7s ease, transform 0.7s ease",
-            }}
-          >
+          <div className="animate-section-in">
             {/* Header */}
             <div className="text-center mb-20">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono mb-5 border"
@@ -469,14 +446,7 @@ export default function LandingPage() {
             SECTION 3 — TEAM
         ══════════════════════════════════════════════════ */}
         <section id="team" className="relative max-w-4xl mx-auto px-6 py-24">
-          <div
-            ref={teamReveal.ref}
-            style={{
-              opacity:   teamReveal.visible ? 1 : 0,
-              transform: teamReveal.visible ? "translateY(0)" : "translateY(48px)",
-              transition:"opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s",
-            }}
-          >
+          <div className="animate-section-in" style={{ animationDelay: "0.1s" }}>
             <div className="text-center mb-16">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono mb-5 border"
                 style={{ background:"rgba(109,40,217,0.12)", borderColor:"rgba(139,92,246,0.3)", color:"#a78bfa" }}>
